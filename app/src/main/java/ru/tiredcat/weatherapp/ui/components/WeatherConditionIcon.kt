@@ -12,8 +12,8 @@ import ru.tiredcat.weatherapp.R
 @Composable
 fun WeatherConditionIcon(
     conditionCode: Long,
-    isDay: Boolean,
-    iconUrlFromApi: String,
+    isDay: Boolean = true,
+    iconUrlFromApi: String = "",
     contentDescription: String?,
     modifier: Modifier = Modifier,
 ) {

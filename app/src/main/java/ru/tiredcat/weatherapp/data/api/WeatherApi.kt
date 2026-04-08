@@ -20,6 +20,6 @@ interface WeatherApi {
     suspend fun getWeatherForecast(
         @Query("key") apiKey: String,
         @Query("q") query: String,
-        @Query("days") days: Int = 2
+        @Query("days") days: Int = 3
     ): WeatherForecast
 }

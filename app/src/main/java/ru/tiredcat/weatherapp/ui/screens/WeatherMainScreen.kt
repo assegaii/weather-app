@@ -1,11 +1,14 @@
 package ru.tiredcat.weatherapp.ui.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
@@ -17,17 +20,23 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import ru.tiredcat.weatherapp.BuildConfig
 import ru.tiredcat.weatherapp.ui.components.GeolocationText
 import ru.tiredcat.weatherapp.ui.components.WeatherDetails
+import ru.tiredcat.weatherapp.ui.components.WeatherForecastDesc
 import ru.tiredcat.weatherapp.ui.components.WeatherToday
 import ru.tiredcat.weatherapp.ui.components.formatApiLocalDate
-import ru.tiredcat.weatherapp.ui.model.WeatherUiState
+import ru.tiredcat.weatherapp.ui.models.HourlyWeather
+import ru.tiredcat.weatherapp.ui.viewmodel.Day
+import ru.tiredcat.weatherapp.ui.viewmodel.WeatherUiState
 
 @Composable
 fun WeatherMainScreen(
     modifier: Modifier = Modifier,
     uiState: WeatherUiState,
+    onSelectDay: (Day) -> Unit,
     onRetry: () -> Unit,
+    onNavigateToWeekly: () -> Unit,
 ) {
     val gradientBrush = remember {
         Brush.verticalGradient(
@@ -37,7 +46,7 @@ fun WeatherMainScreen(
     Box(
         modifier = Modifier
             .background(gradientBrush)
-            .fillMaxSize(),
+            .fillMaxSize()
     ) {
         when (uiState) {
             WeatherUiState.Loading -> {
@@ -78,11 +87,14 @@ fun WeatherMainScreen(
                 val current = weather.current
                 val location = weather.location
 
-                val forecast = uiState.forecast
+                val hourlyList = if (uiState.selectedDay == Day.TODAY) uiState.todayHourly else uiState.tomorrowHourly
+
                 Column(
-                    modifier = modifier,
+                    modifier = modifier
+                        .verticalScroll(rememberScrollState()),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
+
                 ) {
                     GeolocationText(
                         city = location.name,
@@ -100,6 +112,12 @@ fun WeatherMainScreen(
                         precipitation = "${current.precipMm.toInt()} мм",
                         wind = "${current.windKph.toInt()} км/ч",
                         humidity = "${current.humidity}%",
+                    )
+                    WeatherForecastDesc(
+                        state = uiState,
+                        onSelectDay = onSelectDay,
+                        forecastItems = hourlyList,
+                        onNavigateToWeekly = onNavigateToWeekly,
                     )
                 }
             }

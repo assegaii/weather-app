@@ -35,21 +35,24 @@ fun WeatherToday(
         Spacer(modifier = Modifier.width(18.dp))
         Row(horizontalArrangement = Arrangement.Center) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = temperatureC.toString(),
-                    fontSize = 92.sp,
-                    fontWeight = FontWeight.Bold,
-                )
+                Row() {
+                    Text(
+                        text = temperatureC.toString(),
+                        fontSize = 92.sp,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Text(
+                        text = "°c",
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Light,
+                    )
+                }
                 Text(
                     text = conditionText,
-                    fontSize = 34.sp,
+                    fontSize = if (conditionText.trim().length < 2) 34.sp else 24.sp,
                 )
             }
-            Text(
-                text = "°c",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Light,
-            )
+
         }
     }
 }

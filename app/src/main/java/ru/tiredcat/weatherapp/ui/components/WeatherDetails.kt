@@ -40,7 +40,7 @@ fun WeatherDetails(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(horizontal = 26.dp, vertical = 16.dp),
         verticalArrangement = Arrangement
             .spacedBy(8.dp),
 
@@ -79,50 +79,18 @@ fun WeatherDetailItem(icon: Int, title: String, value: String) {
                 painter = painterResource(id = icon),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(62.dp),
+                    .size(42.dp),
                 tint = Color.Unspecified
 
             )
             Spacer(modifier = Modifier.width(10.dp))
             Text(
                 text = title,
-                fontSize = 20.sp
+                fontSize = 18.sp
             )
             Spacer(modifier = Modifier.weight(1f))
-            Text(text = value, fontSize = 18.sp)
+            Text(text = value, fontSize = 14.sp)
             Spacer(modifier = Modifier.width(16.dp))
         }
     }
-}
-
-@Preview(showBackground = true
-)
-@Composable
-fun WeatherDetailsPreview(){
-    Box(modifier = Modifier
-        .clip(RoundedCornerShape(10.dp))
-        .background(Color.White.copy(alpha = 0.7f)),) {
-        Row(
-            modifier = Modifier
-                .padding(horizontal = 8.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_rainfall_desc),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(24.dp),
-                tint = Color.Unspecified
-
-            )
-            Spacer(modifier = Modifier.width(4.dp))
-            Text(
-                text = "Rainfall",
-                fontSize = 7.sp
-            )
-            Spacer(modifier = Modifier.width(72.dp))
-            Text(text = "3 см", fontSize = 7.sp)
-        }
-    }
-
 }

@@ -1,11 +1,14 @@
 package ru.tiredcat.weatherapp.ui.components
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.text.SimpleDateFormat
@@ -25,16 +28,18 @@ fun GeolocationText(
     ) {
         Text(
             text = "$city,",
-            fontSize = 40.sp,
+            fontSize = 20.sp,
         )
         Text(
             text = country,
-            fontSize = 40.sp,
+            fontSize = 20.sp,
         )
         Text(
             text = dateLabel,
-            fontSize = 18.sp,
+            fontSize = 16.sp,
+            color = Color.White
         )
+        Spacer(modifier = Modifier.height(12.dp))
     }
 }
 

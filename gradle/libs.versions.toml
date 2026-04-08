@@ -14,6 +14,9 @@ coroutines="1.7.3"
 okhttp = "4.12.0"
 coilCompose = "2.7.0"
 roomKtx = "2.8.4"
+playService = "21.3.0"
+navigation = "2.9.7"
+room = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,10 +41,16 @@ kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
+play-service-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playService"}
+navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation"}
+room = { group = "androidx.room", name = "room-runtime", version.ref = "room"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 secrets = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secrets"}
+serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin"}
+ksp = {id = "com.google.devtools.ksp", version.ref = "kotlin"}
+
 

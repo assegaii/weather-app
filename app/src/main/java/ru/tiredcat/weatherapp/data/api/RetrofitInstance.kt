@@ -10,11 +10,8 @@ object RetrofitInstance {
     private const val BASE_URL = "https://api.weatherapi.com/v1/"
 
     private  val client: OkHttpClient by lazy {
-        val interceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
+
         OkHttpClient.Builder()
-            .addInterceptor(interceptor)
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .build()
