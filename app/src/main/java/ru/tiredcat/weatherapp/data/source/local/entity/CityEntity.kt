@@ -1,4 +1,4 @@
-package ru.tiredcat.weatherapp.data.local.entity
+package ru.tiredcat.weatherapp.data.source.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

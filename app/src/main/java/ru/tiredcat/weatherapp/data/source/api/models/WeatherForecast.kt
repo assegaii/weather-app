@@ -1,8 +1,4 @@
-package ru.tiredcat.weatherapp.data.api.models
-
-import ru.tiredcat.weatherapp.data.api.models.Location
-import ru.tiredcat.weatherapp.data.api.models.Condition
-import ru.tiredcat.weatherapp.data.api.models.Current
+package ru.tiredcat.weatherapp.data.source.api.models
 
 import com.google.gson.annotations.SerializedName
 

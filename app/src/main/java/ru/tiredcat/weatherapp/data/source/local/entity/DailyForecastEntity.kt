@@ -1,13 +1,12 @@
-package ru.tiredcat.weatherapp.data.local.entity
+package ru.tiredcat.weatherapp.data.source.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
-import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "current_weather",
+    tableName = "daily_forecast",
     foreignKeys = [
         ForeignKey(
             entity = CityEntity::class,
@@ -16,18 +15,15 @@ import androidx.room.PrimaryKey
             onDelete = ForeignKey.CASCADE
         )
     ],
-    indices = [Index("city_id")]
+    indices = [Index("city_id")],
+    primaryKeys = ["city_id", "date"]
 )
-data class CurrentWeatherEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0,
+data class DailyForecastEntity(
     @ColumnInfo(name = "city_id")
     val cityId: Long,
-    val temperature: Double,
-    val description: String,
-    val iconCode: String,
     val date: Long,
-    val precipitation: Float,
-    val windSpeed: Float,
-    val humidity: Int
+    val dayOfWeek: String,
+    val conditionCode: Long,
+    val iconUrlFromApi: String,
+    val temperatureC: Int
 )

@@ -28,6 +28,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ru.tiredcat.weatherapp.data.repository.LocationRepository
 import ru.tiredcat.weatherapp.data.repository.WeatherRepository
+import ru.tiredcat.weatherapp.data.source.api.RetrofitInstance
 import ru.tiredcat.weatherapp.ui.screens.WeatherMainScreen
 import ru.tiredcat.weatherapp.ui.screens.WeeklyWeatherScreen
 import ru.tiredcat.weatherapp.ui.theme.WeatherAppTheme
@@ -46,20 +47,22 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val app = application as WeatherApp
+        val repository = app.weatherRepository
+        val location = app.locationRepository
+        val settings = app.settingsManager
+
         setContent {
             //Навигация
             val navController = rememberNavController()
 
-            val settingsManager = SettingsManager(this)
-
-            val locationRepository = remember{ LocationRepository(this) }
-            val repository = remember { WeatherRepository() }
 
             val factory = remember {
                 object : ViewModelProvider.Factory {
                     override fun <T : ViewModel> create(modelClass: Class<T>): T {
                         @Suppress("UNCHECKED_CAST")
-                        return WeatherViewModel(repository, locationRepository, settingsManager) as T
+                        return WeatherViewModel(repository) as T
                     }
                 }
             }
@@ -77,23 +80,19 @@ class MainActivity : ComponentActivity() {
                     ) == android.content.pm.PackageManager.PERMISSION_GRANTED
                 )
             }
-            val permissionLauncher =
-                rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-                    hasLocationPermission = granted
-                }
 
             LaunchedEffect(hasLocationPermission) {
                 if (hasLocationPermission) {
                     try {
-                        val location = locationRepository.getCurrentLocation()
+                        val location = location.getCurrentLocation()
                         val query = "${location.lat},${location.lon}"
-                        settingsManager.saveLastQuery(query)
+                        settings.saveLastQuery(query)
                         viewModel.loadWeather(query)
                     } catch (e: Exception) {
-                        viewModel.loadWeather(settingsManager.getLastQuery())
+                        viewModel.loadWeather(settings.getLastQuery())
                     }
                 } else {
-                    viewModel.loadWeather(settingsManager.getLastQuery())
+                    viewModel.loadWeather(settings.getLastQuery())
                 }
             }
 

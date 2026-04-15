@@ -83,9 +83,7 @@ fun WeatherMainScreen(
             is WeatherUiState.Success -> {
 
                 //Погода на текущий день
-                val weather = uiState.weather
-                val current = weather.current
-                val location = weather.location
+                val weather = uiState.currentWeather
 
                 val hourlyList = if (uiState.selectedDay == Day.TODAY) uiState.todayHourly else uiState.tomorrowHourly
 
@@ -97,21 +95,21 @@ fun WeatherMainScreen(
 
                 ) {
                     GeolocationText(
-                        city = location.name,
-                        country = location.country,
-                        dateLabel = formatApiLocalDate(location.localtime),
+                        city = weather.city,
+                        country = weather.country,
+                        dateLabel = weather.dateLabel,
                     )
                     WeatherToday(
-                        temperatureC = current.tempC.toInt(),
-                        conditionText = current.condition.text,
-                        conditionCode = current.condition.code,
-                        isDay = current.isDay == 1L,
-                        iconUrlFromApi = current.condition.icon,
+                        temperatureC = weather.temperatureC,
+                        conditionText = weather.conditionText,
+                        conditionCode = weather.conditionCode,
+                        isDay = weather.isDay,
+                        iconUrlFromApi = weather.iconUrlFromApi,
                     )
                     WeatherDetails(
-                        precipitation = "${current.precipMm.toInt()} мм",
-                        wind = "${current.windKph.toInt()} км/ч",
-                        humidity = "${current.humidity}%",
+                        precipitation = "${weather.precipitation} мм",
+                        wind = "${weather.wind} км/ч",
+                        humidity = "${weather.humidity}%",
                     )
                     WeatherForecastDesc(
                         state = uiState,

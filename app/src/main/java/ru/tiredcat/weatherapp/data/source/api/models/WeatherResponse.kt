@@ -1,4 +1,4 @@
-package ru.tiredcat.weatherapp.data.api.models
+package ru.tiredcat.weatherapp.data.source.api.models
 
 import com.google.gson.annotations.SerializedName
 

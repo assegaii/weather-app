@@ -1,4 +1,4 @@
-package ru.tiredcat.weatherapp.data.local.entity
+package ru.tiredcat.weatherapp.data.source.local.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -23,6 +23,6 @@ data class HourlyForecastEntity(
     val cityId: Long,
     val date: Long,
     val time: Long,
-    val iconCode: String,
-    val temperature: Double
+    val conditionCode: Long,
+    val temperatureC: Int
 )

@@ -71,6 +71,9 @@ dependencies {
     implementation(libs.room)
     implementation(libs.play.service.location)
     implementation(libs.navigation)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.hilt.compiler) ////
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -1,14 +1,14 @@
-package ru.tiredcat.weatherapp.data.local
+package ru.tiredcat.weatherapp.data.source.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import ru.tiredcat.weatherapp.data.local.dao.WeatherDao
-import ru.tiredcat.weatherapp.data.local.entity.CityEntity
-import ru.tiredcat.weatherapp.data.local.entity.CurrentWeatherEntity
-import ru.tiredcat.weatherapp.data.local.entity.DailyForecastEntity
-import ru.tiredcat.weatherapp.data.local.entity.HourlyForecastEntity
+import ru.tiredcat.weatherapp.data.source.local.dao.WeatherDao
+import ru.tiredcat.weatherapp.data.source.local.entity.CityEntity
+import ru.tiredcat.weatherapp.data.source.local.entity.CurrentWeatherEntity
+import ru.tiredcat.weatherapp.data.source.local.entity.DailyForecastEntity
+import ru.tiredcat.weatherapp.data.source.local.entity.HourlyForecastEntity
 
 @Database(
     version = 1,
@@ -30,9 +30,9 @@ abstract class WeatherDatabase : RoomDatabase(){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     WeatherDatabase::class.java,
-                    "weather_database"
+                    "weather_db"
                 )
-                    .fallbackToDestructiveMigration() // ⚠️ Пока для разработки, потом замени на Migration
+                    .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
                 instance

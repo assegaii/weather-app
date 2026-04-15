@@ -1,9 +1,9 @@
-package ru.tiredcat.weatherapp.data.api
+package ru.tiredcat.weatherapp.data.source.api
 
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.tiredcat.weatherapp.data.api.models.WeatherForecast
-import ru.tiredcat.weatherapp.data.api.models.WeatherResponse
+import ru.tiredcat.weatherapp.data.source.api.models.WeatherForecast
+import ru.tiredcat.weatherapp.data.source.api.models.WeatherResponse
 
 
 interface WeatherApi {
